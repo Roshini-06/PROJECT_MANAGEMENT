@@ -1,0 +1,75 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-container">
+
+    
+   <a href="{% url 'task_list' %}" class="add-task-btn">📋 View All Tasks</a>
+
+    <div style="margin-bottom: 30px;"></div>
+    <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+
+    <div class="task-columns">
+
+        <!-- To Do -->
+        <div class="task-column">
+            <h2>To Do <span class="status-badge badge-todo">To Do</span></h2>
+            <ul class="task-list">
+                {% for task in tasks %}
+                    {% if task.status == "todo" %}
+                        <li class="task-card">
+                            <strong>{{ task.title }}</strong><br>
+                            {{ task.description|truncatechars:100 }}
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>No tasks.</li>
+                {% endfor %}
+            </ul>
+            <button class="add-task-btn">+ Add Task</button>
+        </div>
+
+        <!-- In Progress -->
+        <div class="task-column">
+            <h2>In Progress <span class="status-badge badge-inprogress">In Progress</span></h2>
+            <ul class="task-list">
+                {% for task in tasks %}
+                    {% if task.status == "inprogress" %}
+                        <li class="task-card">
+                            <strong>{{ task.title }}</strong><br>
+                            {{ task.description|truncatechars:100 }}
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>No tasks.</li>
+                {% endfor %}
+            </ul>
+            <button class="add-task-btn">+ Add Task</button>
+        </div>
+
+        <!-- Done -->
+        <div class="task-column">
+            <h2>Done <span class="status-badge badge-done">Done</span></h2>
+            <ul class="task-list">
+                {% for task in tasks %}
+                    {% if task.status == "done" %}
+                        <li class="task-card">
+                            <strong>{{ task.title }}</strong><br>
+                            {{ task.description|truncatechars:100 }}
+                        </li>
+                    {% endif %}
+                {% empty %}
+                    <li>No tasks.</li>
+                {% endfor %}
+            </ul>
+            <button class="add-task-btn">+ Add Task</button>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2025 Project Management Tool. All rights reserved.
+    </div>
+</div>
+{% endblock %}

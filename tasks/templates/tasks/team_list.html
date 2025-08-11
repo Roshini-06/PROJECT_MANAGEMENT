@@ -1,0 +1,50 @@
+{% extends 'tasks/base.html' %}
+
+
+{% block content %}
+{% load static %}
+    <div class="container">
+    <h2 class="class=text-3xl font-bold mb-4">👥 Teams</h2>
+    <div class="table-container">
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>🧾 Team Name</th>
+                    <th>👤 Members</th>
+                    <th>📌 Projects</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ team.name }}</td>
+                    <td>
+                        <ul>
+                            {% for member in team.members.all %}
+                            <li>{{ member.username }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for project in team.project_set.all %}
+                            <li>{{ project.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">No teams found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Inside team_list.html, at the bottom -->
+<div style="margin-top: 30px;">
+    <a href="{% url 'team_create' %}" class="add-task-btn">➕ Add Team</a>
+</div>
+    <div class="footer">
+        © 2025 Project Management Tool. All rights reserved.
+    </div>
+</div>
+{% endblock %}

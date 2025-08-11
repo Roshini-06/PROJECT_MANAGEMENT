@@ -1,0 +1,18 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<h2>{{ task.title }}</h2>
+<p>{{ task.description }}</p>
+<p>Status: {{ task.get_status_display }}</p>
+<h3>Comments</h3>
+<ul>
+  {% for comment in task.comments.all %}
+    <li>{{ comment.author }}: {{ comment.content }}</li>
+  {% endfor %}
+</ul>
+<form method="POST" id="comment-form">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <button type="submit">Add Comment</button>
+</form>
+<script src="{% static 'js/ajax_comments.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,785 @@
+/* === Base Reset === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #0d0d1a;
+    color: #ffffff;
+    display: flex;
+    min-height: 100vh;
+}
+.centered-box {
+    margin-left: 260px; /* offset for sidebar */
+    padding: 40px;
+    min-height: 100vh;
+}
+
+.page-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* === Sidebar === */
+#sidebar {
+    width: 220px;
+    transition: width 0.3s, transform 0.3s ease;
+    background-color: #14132b;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+/* Sidebar collapsed (manual) */
+#sidebar.collapsed .nav-text {
+    display: none;
+}
+#sidebar.collapsed ul li a {
+    justify-content: center;
+    font-size: 18px;
+    padding: 12px 0;
+}
+#sidebar.collapsed .sidebar-header {
+    justify-content: center;
+}
+
+/* Responsive sidebar hidden by default */
+@media screen and (max-width: 768px) {
+     .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main-content form {
+        width: 100%;
+    }
+    #sidebar {
+        transform: translateX(-100%);
+    }
+
+    #sidebar.collapsed {
+        transform: translateX(0);
+    }
+}
+.content-wrapper {
+    margin-left: 260px;  /* Adjust to match your sidebar width */
+    padding: 20px;
+    color: #ded7d7;
+}
+
+/* Sidebar links */
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+#sidebar ul li {
+    margin: 10px 0;
+}
+#sidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    gap: 10px;
+}
+#sidebar ul li a:hover {
+    background-color: #333;
+    border-radius: 5px;
+    color: #00bcd4;
+}
+
+/* === Hamburger Icon === */
+.hamburger {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* === Main Content === */
+.main-content {
+    margin-left: 250px; /* same width as your sidebar */
+    padding: 20px;
+    color: #fff;
+    min-height: 100vh;
+    background-color: #0e0e20; /* optional: to match the theme */
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+    color:#0d0d1a
+}
+
+.main-content form {
+    background-color: #1c1c3a;
+    padding: 20px;
+    border-radius: 10px;
+    color:#dfdfe9;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 50%;
+}
+
+.main-content form button {
+    background-color: #5c6bc0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-content form button:hover {
+    background-color: #3f51b5;
+}
+
+#sidebar.collapsed ~ .main-content {
+    margin-left: 60px;
+}
+
+/* === Header === */
+header {
+    color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2a2a40;
+    border-bottom: 2px solid #132c57;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.search-box input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1f1f3b;
+    color: white;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profile a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+/* === Dashboard (Columns) === */
+.dashboard-container {
+
+    background-color: #1a1d29; /* Dark background */
+    padding: 40px;
+    border-radius: 12px;
+    border: 3px solid #00bfff; /* Bright border to make it stand out */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    
+    width: 95%; /* Take almost full width */
+    max-width: 1000px; /* Larger max width */
+    margin: 15px auto; /* Center horizontally */
+    
+    min-height: 85vh; /* Taller */
+}
+
+
+.task-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+.task-column {
+    background-color: #1e1e2f;
+    padding: 1rem;
+    border-radius: 10px;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+.task-column h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #5dade2;
+}
+.task-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.task-column li {
+    background-color: #2c2c3e;
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    transition: background 0.3s ease;
+}
+.task-column li:hover {
+    background-color: #3d3d5a;
+}
+.no-tasks,
+.task-column ul li:empty {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* === Task List Container === */
+.task-list-container {
+    background-color: #1e1e2f;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 1100px;
+    color: #f1f1f1;
+}
+
+/* === Add Task Button === */
+.add-task-btn {
+    margin-top: 0 4px;
+    background-color: #00bcd4;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: #0d0d1a;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.add-task-btn:hover {
+    background-color: #03a9c8;
+}
+
+/* === Footer === */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #888;
+}
+
+/* === Styled Table for Tasks === */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+    max-width: 1200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.styled-table thead tr {
+    background-color: #282846;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+}
+.styled-table tbody tr {
+    background-color: #2f2f45;
+    transition: background 0.3s ease;
+}
+.styled-table tbody tr:hover {
+    background-color: #3a3a55;
+}
+.styled-table th {
+    background-color: #2d2f4a;
+    font-weight: bold;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #3c3f5e;
+}
+.empty-msg {
+    text-align: center;
+    color: #ccc;
+    padding: 30px 0;
+    font-style: italic;
+}
+/* === Status Badges === */
+.status-badge {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+.badge.todo {
+    background-color: #f0ad4e;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: white;
+}
+.badge.inprogress {
+    background-color: #5bc0de;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: white;
+}
+.badge.done {
+    background-color: #5cb85c;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: white;
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 4px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+.btn.danger {
+    background-color: #dc3545;
+}
+.btn.danger:hover {
+    background-color: #c82333;
+}
+.btn.small {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* === Scrollbar Styling === */
+.dashboard-columns::-webkit-scrollbar {
+    height: 8px;
+}
+.dashboard-columns::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+#sidebar.collapsed {
+    width: 4rem;
+}
+
+#wrapper.sidebar-collapsed #main-content {
+    margin-left: 4rem;
+}
+
+.menu-label {
+    transition: opacity 0.2s ease;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #0e1a2b;
+}
+
+.auth-box {
+    background-color: #182a3f;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px;
+    color: #fff;
+    text-align: center;
+}
+
+.auth-box h2 {
+    margin-bottom: 20px;
+}
+
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-box input {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background-color: #e23744;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c42132;
+}
+
+.switch-auth {
+    margin-top: 20px;
+    font-size: 14px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* equal column widths */
+    box-sizing: border-box;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #2a2a3b;
+}
+
+tr:nth-child(even) {
+    background-color: #2f2f44;
+}
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-wrap: break-word;
+}
+/* === Topbar === */
+.topbar {
+    margin-left: 250px;
+    background-color: #151529;
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.topbar a {
+    color: #00ffff;
+    text-decoration: none;
+    margin-left: 15px;
+}
+/* Container */
+.form-box {
+  background-color: #1a1a3c;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Labels */
+.form-box label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Input fields */
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"],
+.form-box textarea,
+.form-box select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #2a2a4d;
+  color: rgb(6, 1, 1);
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-box input::placeholder,
+.form-box textarea::placeholder {
+  color: #141414 !important;
+}
+.form-box input:focus,
+.form-box textarea:focus,
+.form-box select:focus {
+  border-color: #5a72f2;
+}
+
+/* Button */
+.form-box button {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background-color: #5a72f2;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-box button:hover {
+  background-color: #3f53b2;
+} 
+/* Outer box */
+.container {
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px solid #00bfff; /* Bright border to make it stand out */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    background-color: #1e1e2e; /* Outer background */
+   
+    width: fit-content; /* or a fixed px value if you want */
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Table container inside */
+.table-container {
+    width: 100%;
+}
+
+/* Table itself */
+table {
+    width: 100%; /* Make table as wide as the parent */
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #2a2a3b;
+}
+
+tr:nth-child(even) {
+    background-color: #2f2f44;
+}
+.outer-box {
+    background-color: #1e1e2e;
+    border-radius: 12px;
+    border: 3px solid #00bfff; /* Bright border to make it stand out */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    padding: 20px;
+    width: 100%;
+    display: inline-block; /* match content width */
+    max-width: 1200px;
+    margin:auto;
+    overflow-x:auto; /* prevent overflow on small screens */
+}
+.outer-box h2,
+.outer-box .add-task {
+    margin-bottom: 15px;
+}
+.task-table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout:auto;
+}
+
+.task-table th,
+.task-table td {
+    padding: 14px 18px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.task-table th {
+    background-color: #2a2a3b;
+}
+
+.task-table tr:nth-child(even) {
+    background-color: #2f2f44;
+}
+
+.header {
+    margin-bottom: 10px;
+}
+
+
+.form-container {
+    background-color: #1e1e2e;
+    padding: 20px;
+    max-width: 500px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-container input[type="text"],
+.form-container textarea,
+.form-container select,
+.form-container input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.form-container textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form-container .btn-cancel {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.form-container .btn-save {
+    background-color: #388e3c;
+    color: white;
+    margin-right: 10px;
+}
+/* Dark themed page background */
+.project-form-page {
+    margin: 0;
+    padding: 0;
+    background-color: #0a1f44; /* Deep blue */
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Form box */
+.project-form {
+    background-color: rgba(255, 255, 255, 0.05); /* Transparent glass look */
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+}
+
+/* Form heading */
+.project-form h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Django form fields */
+.project-form p {
+    margin-bottom: 14px;
+}
+
+.project-form label {
+    color: #ddd;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.project-form input,
+.project-form textarea,
+.project-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Submit button */
+.project-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e90ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.project-form button:hover {
+    background-color: #187bcd;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 20px;
+    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+}
