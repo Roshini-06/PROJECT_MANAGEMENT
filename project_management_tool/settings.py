@@ -66,7 +66,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 
 # Folder where collectstatic will gather all static files
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Optional: if you have a 'static' folder in your app
 STATICFILES_DIRS = [
